@@ -14,8 +14,22 @@ public class BoardVO {
 	private String board_title;
 	private String board_content;
 	private String board_regdate;
+	private int board_history;
+	private int board_recommendation;
 	
 	
+	public int getBoard_history() {
+		return board_history;
+	}
+	public void setBoard_history(int board_history) {
+		this.board_history = board_history;
+	}
+	public int getBoard_recommendation() {
+		return board_recommendation;
+	}
+	public void setBoard_recommendation(int board_recommendation) {
+		this.board_recommendation = board_recommendation;
+	}
 	public int getBoard_num() {
 		return board_num;
 	}
