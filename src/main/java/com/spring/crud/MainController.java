@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
   @RequestMapping(value = "/")
   public String goMain() {
   System.out.println("메인으로가자!");
-  
-  return "main"; } 
+  return "main"; 
+  } 
   }
  

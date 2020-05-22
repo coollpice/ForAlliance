@@ -7,8 +7,14 @@
 
 
 	<select id="boardList" resultType="board">
-		SELECT *
-		FROM board
+		SELECT  board_num,
+				board_writer,
+				board_title,
+				board_content ,
+				to_char(board_regdate,'yyyy-mm-dd') ,
+				board_history,
+				board_recommendation 
+		FROM promotional_board
 		ORDER BY board_num
 	</select> 
 	
