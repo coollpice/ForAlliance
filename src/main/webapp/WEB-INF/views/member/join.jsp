@@ -8,10 +8,11 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function(){
+		// ajax로 가입된 아이디인지 확인
 		$("#c_id").blur(function(){
 			$.ajax({
 				type : "GET",
-				url : "/login/joinIdCheck.do",
+				url : "/member/joinIdCheck.do",
 				data : {c_id : $("#c_id").val()},
 				success : function(data) {
 					if ("2" == data) {
@@ -30,6 +31,7 @@
 			});
 		});
 		
+		// 입력한 비밀번호가 동일한지 체크
 		$("#c_pwd").blur(function(){
 			if ($("#c_pwd").val() != $("#check_pwd").val()) {
 				$("#chk_pwd").show();
@@ -39,7 +41,6 @@
 				$("#chk_pwd").text("");
 			}
 		});
-		
 		$("#check_pwd").blur(function(){
 			if ($("#c_pwd").val() != $("#check_pwd").val()) {
 				$("#chk_pwd").show();
@@ -49,13 +50,34 @@
 				$("#chk_pwd").text("");
 			}
 		});
+		
+		// 이메일 중복 확인 버튼 클릭시 팝업
+		$("#btn_email").click(function(){
+			window.open("/member/joinEmailCheckForm.do", "_blank", "width=800, height=400");
+		});
+		
+		// 회원정보 입력 후 가입하기 버튼
+		$("#btn_success").click(function(){
+			$("#f_join").attr({
+				"method":"POST",
+				"action":"/member/joinSubmit.do"
+			});
+			$("#f_join").submit();
+		});
+		
+		/* 돌아가기 버튼 클릭 시 처리 이벤트 */
+		$("#btn_cancel").click(function(){
+			if (confirm("로그인 페이지로 돌아갑니까?")) {
+				location.href="/member/loginForm.do";
+			}
+		});
 	});
 </script>
 </head>
 <body>
 	<div>
 		<div>
-			<form>
+			<form id="f_join">
 				<input type="hidden" id="c_email" name="c_email">
 				
 				<div>
@@ -82,28 +104,24 @@
 				</div>
 				<div>
 					<label>이메일</label>
-					<input type="text" id="s1_email" placeholder="ex) wow1234"> @ 
-					<select id="s2_email">
-						<option value="naver.com">naver.com</option>
-						<option value="daum.net">daum.net</option>
-						<option value="gmail.com">gmail.com</option>
-						<option>직접 입력</option>
-					</select>
-					<input type="text" id="s3_email" placeholder="직접 입력" disabled>
+					<input type="text" id="s1_email" disabled> 
+					<span>@</span>
+					<input type="text" id="s2_email" disabled>
+					<input type="button" id="btn_email" value="이메일 중복 확인">
 				</div>
 				<div>
 					<label>진영</label>
-					<input type="radio" name="c_position">얼라이언스
-					<input type="radio" name="c_position">호드
-					<input type="radio" name="c_position">미정
+					<input type="radio" name="c_position" value="얼라" checked>얼라이언스
+					<input type="radio" name="c_position" value="호드">호드
+					<input type="radio" name="c_position" value="미정">미정
 				</div>
 				<div>
 					<label>생년월일</label>
-					<input type="text" id="c_name" name="c_name" placeholder="ex) 200522">
+					<input type="text" id="c_birth" name="c_birth" placeholder="ex) 200522">
 				</div>
 				<div>
 					<label>성별</label>
-					<input type="radio" name="c_gender">남자
+					<input type="radio" name="c_gender" checked>남자
 					<input type="radio" name="c_gender">여자
 				</div>
 				<div>

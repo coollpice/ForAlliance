@@ -8,7 +8,7 @@
 </head>
 <body>
  <a href="/board/boardList.do">[게시판 보기]</a>
-  <a href="/login/joinForm.do">[회원가입]</a>
-  <a href="#">[로그인]</a>
+  <a href="/member/joinForm.do">[회원가입]</a>
+  <a href="/member/loginForm.do">[로그인]</a>
 </body>
 </html>

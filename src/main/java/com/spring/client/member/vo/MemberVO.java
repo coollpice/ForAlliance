@@ -1,6 +1,6 @@
-package com.spring.client.login.vo;
+package com.spring.client.member.vo;
 
-public class LoginVO {
+public class MemberVO {
 	private int c_num; // 회원번호
 	private String c_id; // 회원아이디
 	private String c_pwd; // 회원비밀번호

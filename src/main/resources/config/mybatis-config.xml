@@ -5,7 +5,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.spring.crud.vo.BoardVO" alias="board"></typeAlias>
-		<typeAlias type="com.spring.client.login.vo.LoginVO" alias="login"></typeAlias>
+		<typeAlias type="com.spring.client.member.vo.MemberVO" alias="member"></typeAlias>
 	</typeAliases>
 	
 	
