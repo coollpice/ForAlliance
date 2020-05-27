@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
   @Controller 
   public class MainController {
   
-  @RequestMapping(value = "/")
+  @RequestMapping(value = "/main/main.do")
   public String goMain() {
   System.out.println("메인으로가자!");
   return "main"; 

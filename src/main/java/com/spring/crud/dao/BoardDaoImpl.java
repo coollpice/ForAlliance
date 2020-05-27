@@ -21,4 +21,19 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlsession.selectList("boardList");
 	}
 
+	@Override
+	public int boardWrite(BoardVO bvo) {
+		return sqlsession.insert("boardWrite",bvo);
+	}
+
+	@Override
+	public BoardVO boardDetail(int board_num) {
+		return sqlsession.selectOne("boardDetail",board_num);
+
+	}
+
+	@Override
+	public void boardHistory(int board_num) {
+		sqlsession.update("boardHistory",board_num);
+	}
 }

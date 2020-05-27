@@ -6,6 +6,22 @@
 <head>
 <meta charset="UTF-8">
 <title>길드 홍보 게시판</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		
+		//글쓰기 버튼 클릭
+		$("#writeBtn").click(function(){
+			location.href="/board/writeForm.do";
+		});
+		
+		//상세보기
+		$(".detail").click(function(){
+			let num = $(this).attr("data-num");
+			location.href="/board/boardDetail.do?board_num="+num;
+		});
+	});
+</script>
 </head>
 <body>
 
