@@ -11,12 +11,33 @@
 				board_writer,
 				board_title,
 				board_content ,
-				to_char(board_regdate,'yyyy-mm-dd') ,
+				to_char(board_regdate,'yyyy-mm-dd') as board_regdate ,
 				board_history,
 				board_recommendation 
 		FROM promotional_board
 		ORDER BY board_num
 	</select> 
+	
+	
+	<select id="boardDetail" parameterType="int" resultType="board"> 
+	 	SELECT *
+	 	FROM promotional_board
+	 	WHERE board_num = #{board_num}
+	</select>
+	
+	<insert id="boardWrite" parameterType="board">
+		INSERT INTO promotional_board (board_num, board_writer, board_title, board_content, board_history, board_recommendation, board_file1, board_file2, board_image)
+		VALUES(promotional_board_seq.nextval,#{board_writer},#{board_title},#{board_content},0,0,#{board_file1,jdbcType=VARCHAR},#{board_file2,jdbcType=VARCHAR},#{board_image,jdbcType=VARCHAR})
+	</insert>
+	
+	<!-- 조회수 설정 -->
+	<update id="boardHistory" parameterType="int">
+		UPDATE promotional_board
+		SET board_history = board_history+1
+		WHERE board_num = #{board_num}
+	</update>
+	
+	
 	
 	<!-- <select id="getSomething" parameterType="int" resultType="#package.#modelname">
 		SELECT
@@ -33,10 +54,6 @@
 		<result property="param3" column="columnname3" />
 	</resultMap>
 
-	<insert id="insertSomething" parameterType="#modelname">
-		INSERT INTO tablename1 (columnname1, columnname2, columnname3)
-		VALUES(#{value1},#{value2},#{value3})
-	</insert>
 
 	<update id="updateSomething" parameterType="#modelname">
 		UPDATE tablename1

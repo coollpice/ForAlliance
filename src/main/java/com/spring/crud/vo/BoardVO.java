@@ -1,5 +1,7 @@
 package com.spring.crud.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class BoardVO {
 	/* 테이블 구조
 	board_num number primary key,
@@ -16,7 +18,51 @@ public class BoardVO {
 	private String board_regdate;
 	private int board_history;
 	private int board_recommendation;
+	private String board_file1;
+	private String board_file2;
+	private String board_image;
+	private MultipartFile file1;   //첨부파일1
+	private MultipartFile file2;   //첨부파일2
+	private MultipartFile file3;   //이미지파일
 	
+	
+	
+	public String getBoard_file1() {
+		return board_file1;
+	}
+	public void setBoard_file1(String board_file1) {
+		this.board_file1 = board_file1;
+	}
+	public String getBoard_file2() {
+		return board_file2;
+	}
+	public void setBoard_file2(String board_file2) {
+		this.board_file2 = board_file2;
+	}
+	public String getBoard_image() {
+		return board_image;
+	}
+	public void setBoard_image(String board_image) {
+		this.board_image = board_image;
+	}
+	public MultipartFile getFile1() {
+		return file1;
+	}
+	public void setFile1(MultipartFile file1) {
+		this.file1 = file1;
+	}
+	public MultipartFile getFile2() {
+		return file2;
+	}
+	public void setFile2(MultipartFile file2) {
+		this.file2 = file2;
+	}
+	public MultipartFile getFile3() {
+		return file3;
+	}
+	public void setFile3(MultipartFile file3) {
+		this.file3 = file3;
+	}
 	
 	public int getBoard_history() {
 		return board_history;

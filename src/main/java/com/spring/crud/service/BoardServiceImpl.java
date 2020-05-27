@@ -18,8 +18,22 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public List<BoardVO> boardList() {
-		// TODO Auto-generated method stub
 		return boardDao.boardList();
+	}
+
+	@Override
+	public int boardWrite(BoardVO bvo) {
+		return boardDao.boardWrite(bvo);
+	}
+
+	@Override
+	public BoardVO boardDetail(int board_num) {
+		return boardDao.boardDetail(board_num);
+	}
+
+	@Override
+	public void boardHistory(int board_num) {
+		boardDao.boardHistory(board_num);
 	}
 
 }
