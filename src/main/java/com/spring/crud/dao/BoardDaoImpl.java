@@ -36,4 +36,9 @@ public class BoardDaoImpl implements BoardDao {
 	public void boardHistory(int board_num) {
 		sqlsession.update("boardHistory",board_num);
 	}
+
+	@Override
+	public int updateBoard(BoardVO bvo) {
+		return sqlsession.update("updateBoard",bvo);
+	}
 }

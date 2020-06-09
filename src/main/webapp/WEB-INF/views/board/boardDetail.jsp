@@ -10,7 +10,16 @@
 	src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function() {
-
+		
+		//목록으로
+		$("#golist").click(function(){
+			location.href="/board/boardList.do";
+		});
+		
+		//수정하기
+		$("#updateBtn").click(function(){
+			 location.href="/board/boardUpdateForm.do?board_num="+${detail.board_num};
+		});
 	});
 </script>
 </head>
@@ -37,6 +46,11 @@
 		<c:if test="${not empty detail.board_image}">
 		 <img src="/uploadStorage/guild/${detail.board_image}" style="width: 200px; height: 250px;"/>
 		</c:if>
+		</div>
+		<div>
+			<input type="button" id="updateBtn" name="updateBtn" value="수정"/>
+			<input type="button" id="deleteBtn" name="deleteBtn" value="삭제"/>
+			<input type="button" id="golist" name="golist" value="목록으로"/>
 		</div>
 	</div>
 </body>

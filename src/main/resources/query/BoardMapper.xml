@@ -37,6 +37,13 @@
 		WHERE board_num = #{board_num}
 	</update>
 	
+	<!-- 글 수정하기 -->
+	<update id="updateBoard" parameterType="board">
+		UPDATE promotional_board
+		SET board_title = #{board_title} , board_content = #{board_content} , board_file1 = #{board_file1,jdbcType=VARCHAR} , board_file2 = #{board_file2,jdbcType=VARCHAR}, board_image = #{board_image,jdbcType=VARCHAR}
+		WHERE board_num = #{board_num}
+	</update>
+	
 	
 	
 	<!-- <select id="getSomething" parameterType="int" resultType="#package.#modelname">

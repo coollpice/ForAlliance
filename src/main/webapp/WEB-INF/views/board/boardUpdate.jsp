@@ -1,24 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>글쓰기</title>
+<title>Insert title here</title>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript">
- $(function(){
+$(function(){
 	 
-	// $('input:[name="array"]:[value="'+data.val+'"]').attr("checked",true);
-	
-	$(".checkclass").click(function(){
-		if($('input:checkbox[name=check]:checked').length == 3){
-			alert("다체크");
-		}
-	}) ;
-	
-	
 	 //파일첨부 버튼 클릭시 실행
 	 $("#fileBtn").click(function(){
 		 $(".imagehide").hide(); 
@@ -36,9 +28,17 @@
 		location.href="/board/boardList.do"; 
 	 });
 	 
-	 //등록버튼 클릭시 실행
-	 $("#insertBtn").click(function(){
-		 let formData = new FormData($("#writeForm")[0]);
+	 
+	 $(".hov").hover(function(){
+		$("#image").show();
+	 },function(){
+		$("#image").hide();
+	 });
+	 
+	 
+	 //수정버튼 클릭시 실행
+	 $("#updateBtn").click(function(){
+		 let formData = new FormData($("#updateForm")[0]);
 		 if($("#board_title").val()==''){
 			 alert("제목을 입력하세요");
 			 $("#board_title").focus();
@@ -49,17 +49,17 @@
 			 return;
 		 }else{
 			$.ajax({
-				url:"/board/boardWrite.do",
+				url:"/board/boardUpdate.do",
 				type : "POST",
 				processData : false,
 				contentType : false,
 				data : formData,
 				success : function(data){
 					if(data == 1){
-						alert("게시글 등록이 되었습니다");
+						alert("게시글이 수정 되었습니다");
 						location.href="/board/boardList.do";
 					}else{
-						alert("게시글 등록에 실패하였습니다.");
+						alert("게시글 수정에 실패하였습니다.");
 						loaction.reload(true);
 					}
 				}
@@ -67,26 +67,25 @@
 		 }
 	 });
 	 
- });
+});
 </script>
 </head>
 <body>
-	<h1>게시글 쓰기</h1>
-	<form id="writeForm" name="writeForm" enctype="multipart/form-data">
-		<input type="hidden" name="board_writer" id="board_writer" value="임시" />
+ <h1>수정하기</h1>
+ <form id="updateForm" name="updateForm" enctype="multipart/form-data">
+		<input type="hidden" name="board_writer" id="board_writer" value="${update.board_writer}" />
+		<input type="hidden" name="board_num" id="board_num" value="${update.board_num }"/>
+		<input type="hidden" name="board_image" id="board_image" value="${update.board_image }"/>
 		<div>
 			<table>
 				<tbody>
 					<tr>
-						<td>체크1<input type="checkbox" name="check" value="값11" class="checkclass"/>체크2<input type="checkbox" name="check" value="값22"  class="checkclass"/>체크3<input type="checkbox" name="check" value="값33"  class="checkclass"/></td>
-					</tr>
-					<tr>
 						<td colspan="2"><span>제목</span><input type="text"
-							name="board_title" id="board_title" /></td>
+							name="board_title" id="board_title" value="${update.board_title}" /></td>
 					</tr>
 					<tr>
 						<td colspan="2"><textarea rows="20" cols="50"
-								name="board_content" id="board_content" style="resize: none;"></textarea></td>
+								name="board_content" id="board_content" style="resize: none;">${update.board_content}</textarea></td>
 					</tr>
 					<tr>
 						<td colspan="2"><input type="button" name="imageBtn"
@@ -100,16 +99,32 @@
 						<td><input type="file" id="file1" name="file1" /></td>
 						<td><input type="file" id="file2" name="file2" /></td>
 					</tr>
+					<c:if test="${not empty update.board_file1 }">
+					<tr>
+						<td>현재 등록된 파일 : ${update.board_file1}</td>
+					</tr>
+						</c:if>
+						<c:if test="${not empty update.board_file2 }">
+					<tr>
+						<td>현재 등록된 파일 : ${update.board_file2} </td>
+					</tr>
+						</c:if>
 					<tr class="imagehide" style="display: none;">
 						<td style="color: red;">*본문에 보이게될 이미지 입니다.</td>
-					</tr>
+					</tr> 
 					<tr class="imagehide" style="display: none;">
 						<td><input type="file" id="file3" name="file3" /></td>
 					</tr>
+					<c:if test="${not empty update.board_image }">
+					<tr  class="imagehide" style="display: none;">
+						<td class="hov">현재 등록된 이미지 : ${update.board_image}</td>
+					</tr>
+						</c:if>
 				</tbody>
 			</table>
+			<div style="position: absolute; left:250px; top:100px;" ><img id="image" src="/uploadStorage/guild/${update.board_image}" style="display: none; width: 250px; height: 250px;"/></div>
 			<div>
-				<input type="button" name="insertBtn" id="insertBtn" value="작성완료" />
+				<input type="button" name="updateBtn" id="updateBtn" value="수정완료" />
 				<input type="button" name="golist" id="golist" value="목록으로"/>
 			</div>
 		</div>
